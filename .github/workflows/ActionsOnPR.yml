@@ -38,11 +38,10 @@ jobs:
           dotnet sln ./myNewFolder/t.sln add TestConsoleApp.csproj
           dotnet add ./**/XUnitTestProject1.csproj reference TestConsoleApp.csproj
           dotnet sln ./myNewFolder/t.sln add ./**/XUnitTestProject1.csproj
-          nuget restore ./myNewFolder/t.sln
                   
       - name: ?????
         run: |
-          dotnet add package xUnit
+          nuget restore ./myNewFolder/t.sln
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
