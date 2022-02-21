@@ -1,6 +1,10 @@
 name: ActionsOnPR
-on: pull_request
-  
+on:
+  push:
+    branches:    
+      - main
+      - 'temp'
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,6 +14,8 @@ jobs:
         
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: temp
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1.7.2
         with:
@@ -21,21 +27,29 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
         
-      - name: Create sln
+      - name: ??
         working-directory: ./myNewFolder
         run: dotnet new sln --name t
           
-      - name: Add csproj
+      - name: ????
+        id: build_and_test
         run: |
-          dotnet sln ./myNewFolder/t.sln add **/TestConsoleApp.csproj
-          dotnet add XUnitTestProject1.csproj reference **/TestConsoleApp.csproj
-          dotnet sln ./myNewFolder/t.sln add XUnitTestProject1.csproj
+          dotnet sln ./myNewFolder/t.sln add TestConsoleApp.csproj
+          dotnet add ./tests/XUnitTestProject1.csproj reference TestConsoleApp.csproj
+          dotnet sln ./myNewFolder/t.sln add ./tests/XUnitTestProject1.csproj
           nuget restore ./myNewFolder/t.sln
                   
-      - name: Build and test
+      - name: ?????
         run: |
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
+      - name: Invoke workflow with inputs
+        uses: benc-uk/workflow-dispatch@v1
+        if: success()
+        with:
+          workflow: Auto approve
+          token: ${{ secrets.TOKEN }}
+          inputs: '{ "prnum": "${{github.event.number}}" }'
           
       - name: Publish Unit Test Results
         uses: actions/upload-artifact@v2
@@ -43,3 +57,5 @@ jobs:
         with:
           name: test-results  
           path: ./**/TestResults/*.trx
+          
+      
