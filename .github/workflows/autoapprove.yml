@@ -1,7 +1,5 @@
 name: Automatic Approve
 on:
-  schedule:
-    - cron: "*/15 * * * *"
   workflow_dispatch:
 jobs:
   automatic-approve:
