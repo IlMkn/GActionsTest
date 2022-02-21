@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: copy
         env:
-          SRC_FOLDER_PATH: 'empty'
+          SRC_FOLDER_PATH: 'tests'
           TARGET_BRANCH: 'temp'
         run: |
           files=$(find $SRC_FOLDER_PATH -type f)
