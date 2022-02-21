@@ -5,6 +5,7 @@ on:
     workflows: ['mergeAction']                    
     types:
       - completed
+  workflow_dispatch:    
 
 jobs:
   copy:
