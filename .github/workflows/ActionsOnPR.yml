@@ -41,7 +41,7 @@ jobs:
                   
       - name: ?????
         run: |
-          dotnet add package xUnit
+          dotnet restore
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
