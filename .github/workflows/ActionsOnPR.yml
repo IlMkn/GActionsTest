@@ -40,7 +40,7 @@ jobs:
       - name: Build and test
         run: |
           dotnet build t.sln
-          dotnet test XUnitTestProject1.csproj --no-restore --logger "trx;LogFileName=test-results.trx"   
+          dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
       - name: Publish Unit Test Results
         uses: actions/upload-artifact@v2
