@@ -44,7 +44,7 @@ jobs:
                   
       - name: ?????
         run: |
-          dotnet restore
+          nuget restore ./myNewFolder/t.sln
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
