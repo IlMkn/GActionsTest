@@ -35,7 +35,7 @@ jobs:
           dotnet sln t.sln add TestConsoleApp.csproj
           dotnet add XUnitTestProject1.csproj reference TestConsoleApp.csproj
           dotnet sln t.sln add XUnitTestProject1.csproj
-          nuget restore t.sln
+          dotnet restore t.sln
                   
       - name: Build and test
         run: |
