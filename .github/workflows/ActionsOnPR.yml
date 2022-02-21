@@ -36,7 +36,7 @@ jobs:
         id: build_and_test
         run: |
           dotnet sln ./myNewFolder/t.sln add TestConsoleApp.csproj
-          dotnet add **/XUnitTestProject1.csproj reference TestConsoleApp.csproj
+          dotnet add TestConsoleApp.csproj reference **/XUnitTestProject1.csproj
           dotnet sln ./myNewFolder/t.sln add **/XUnitTestProject1.csproj
           nuget restore ./myNewFolder/t.sln
                   
