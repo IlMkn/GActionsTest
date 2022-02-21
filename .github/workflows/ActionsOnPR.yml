@@ -28,6 +28,19 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
         
+      - name: copy file1
+        uses: canastro/copy-file-action@master
+        with:
+          source: "tests/UnitTest1.cs"
+          target: "UnitTest1.cs"
+      
+      - name: copy file2
+        uses: canastro/copy-file-action@master
+        with:
+          source: "tests/XUnitTestProject1.csproj"
+          target: "XUnitTestProject1.csproj"
+
+        
       - name: ??
         working-directory: ./myNewFolder
         run: dotnet new sln --name t
@@ -53,3 +66,5 @@ jobs:
           path: ./**/TestResults/*.trx
           
       
+      
+ 
