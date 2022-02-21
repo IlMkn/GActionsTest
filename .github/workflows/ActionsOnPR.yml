@@ -4,19 +4,16 @@ on:
     workflows: ['Copy']                    
     types:
       - completed
-  workflow_dispatch:    
- 
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['3.1.x']
+        dotnet-version: [ '3.1.x' ]
         
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: temp
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1.7.2
         with:
@@ -28,35 +25,21 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
         
-      - name: copy file1
-        uses: canastro/copy-file-action@master
-        with:
-          source: "tests/UnitTest1.cs"
-          target: "UnitTest1.cs"
-      
-      - name: copy file2
-        uses: canastro/copy-file-action@master
-        with:
-          source: "tests/XUnitTestProject1.csproj"
-          target: "XUnitTestProject1.csproj"
-
-        
-      - name: ??
+      - name: Create sln
         working-directory: ./myNewFolder
         run: dotnet new sln --name t
           
-      - name: ????
-        id: build_and_test
+      - name: Add csproj
         run: |
           dotnet sln ./myNewFolder/t.sln add TestConsoleApp.csproj
-          dotnet add XUnitTestProject1.csproj reference TestConsoleApp.csproj
-          dotnet sln ./myNewFolder/t.sln add XUnitTestProject1.csproj
+          dotnet add **/XUnitTestProject1.csproj reference TestConsoleApp.csproj
+          dotnet sln ./myNewFolder/t.sln add **/XUnitTestProject1.csproj
           nuget restore ./myNewFolder/t.sln
                   
-      - name: ?????
+      - name: Build and test
         run: |
           dotnet build ./myNewFolder/t.sln
-          dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
+          dotnet test **/XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
       - name: Publish Unit Test Results
         uses: actions/upload-artifact@v2
@@ -64,7 +47,6 @@ jobs:
         with:
           name: test-results  
           path: ./**/TestResults/*.trx
-          
       
       
  
