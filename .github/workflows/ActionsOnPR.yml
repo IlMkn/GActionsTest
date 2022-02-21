@@ -28,7 +28,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
         
       - name: Create sln
-        working-directory: ./myNewFolder
+        
         run: dotnet new sln --name t
           
       - name: Add csproj
