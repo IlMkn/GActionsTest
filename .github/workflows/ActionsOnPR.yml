@@ -36,14 +36,14 @@ jobs:
         id: build_and_test
         run: |
           dotnet sln ./myNewFolder/t.sln add TestConsoleApp.csproj
-          dotnet add TestConsoleApp.csproj reference **/XUnitTestProject1.csproj
+          dotnet add **/XUnitTestProject1.csproj reference TestConsoleApp.csproj
           dotnet sln ./myNewFolder/t.sln add **/XUnitTestProject1.csproj
           nuget restore ./myNewFolder/t.sln
                   
       - name: ?????
         run: |
           dotnet build ./myNewFolder/t.sln
-          dotnet test **/XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
+          dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
       - name: Publish Unit Test Results
         uses: actions/upload-artifact@v2
