@@ -13,4 +13,12 @@ jobs:
         artifact: test-results            
         name: dotnet-trx                  
         path: ./**/TestResults/*.trx                   
-        reporter: dotnet-trx     
+        reporter: dotnet-trx   
+  deletebranch:
+    runs-on: ubuntu-latest
+    steps:         
+    - name: Delete branch
+      uses: dawidd6/action-delete-branch@v3
+      with:
+        github_token: ${{github.token}}
+        branches: temp        
