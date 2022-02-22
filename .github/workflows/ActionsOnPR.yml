@@ -28,11 +28,13 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
         
       - name: Create sln
+        continue-on-error: true
         id: step1
         working-directory: ./myNewFolder
         run: dotnet new sln --name t
           
       - name: Add csproj
+        continue-on-error: true
         id: step2
         run: |
           dotnet sln ./myNewFolder/t.sln add **/TestConsoleApp.csproj
@@ -41,12 +43,14 @@ jobs:
           nuget restore ./myNewFolder/t.sln
                   
       - name: Build and test
+        continue-on-error: true
         id: step3
         run: |
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
       - name: Publish Unit Test Results
+        continue-on-error: true
         id: step4
         uses: actions/upload-artifact@v2
         if: always()
@@ -54,12 +58,6 @@ jobs:
           name: test-results  
           path: ./**/TestResults/*.trx
 
-  Status:
-    runs-on: ubuntu-latest      
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: temp
       - name: WorkflowStatus1
         id: conclusion
         if: |
