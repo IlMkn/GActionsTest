@@ -28,7 +28,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
         
       - name: copy file
-        uses: canastro/copy-file-action@master
+        uses: canastro/copy-action@0.0.2
         with:
           source: "code_for_testing/Sum.cs"
           target: "Sum.cs"  
