@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: conc
-          path: conclusion.txt   
+          path: ./**/*.txt   
           
         
         
