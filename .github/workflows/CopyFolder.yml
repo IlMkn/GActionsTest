@@ -13,7 +13,7 @@ jobs:
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.TOKEN }}
-        src_path: /tests/.
+        src_path: path/to/UnitTest1.cs
         dst_path: /.
         dst_owner: IlMkn
         dst_repo_name: GACtionsTest
