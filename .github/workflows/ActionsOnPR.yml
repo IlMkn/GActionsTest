@@ -69,7 +69,7 @@ jobs:
           steps.step4.outcome == 'success' 
         shell: bash
         run: |
-          expr 0+0 > conslusion.txt
+          expr 0+0 > conclusion.txt
           
       - name: WorkflowStatus2
         if: |
@@ -79,7 +79,7 @@ jobs:
           steps.step4.outcome != 'success' 
         shell: bash
         run: |
-          expr 0+1 > conslusion.txt    
+          expr 0+1 > conclusion.txt    
           
       - name: Upload conclusion
         uses: actions/upload-artifact@v2
