@@ -1,29 +1,21 @@
 name: Copy
-
 on:
   workflow_run:
     workflows: ['mergeAction']                    
     types:
       - completed
   workflow_dispatch:    
-
 jobs:
   copy:
-    name: Copy my folder
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: copy
-        env:
-          SRC_FOLDER_PATH: 'tests'
-          TARGET_BRANCH: 'temp'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f)
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch                        
-          git checkout $TARGET_BRANCH       
-          git checkout ${GITHUB_REF##*/} -- $files 
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+    - name: Copycat
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.TOKEN }}
+        src_path: /tests/
+        dst_path: /.
+        dst_owner: IlMkn
+        dst_repo_name: GACtionsTest
+        dst_branch: temp
+        src_branch: master
