@@ -14,3 +14,10 @@ jobs:
         name: dotnet-trx                  
         path: ./**/TestResults/*.trx                   
         reporter: dotnet-trx   
+        
+    - name: Delete branch
+      uses: dawidd6/action-delete-branch@v3
+      with:
+        github_token: ${{github.token}}
+        branches: temp
+        suffix: -done    
