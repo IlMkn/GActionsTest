@@ -73,11 +73,21 @@ jobs:
         if: |
           steps.step1.outcome != 'success' ||
           steps.step2.outcome != 'success' ||
-          steps.step3.outcome != 'success' ||
           steps.step4.outcome != 'success' 
         shell: bash
         run: |
           expr 0+1 > conclusion.txt    
+          
+          
+      - name: WorkflowStatus3
+        if: |
+          steps.step1.outcome == 'success' &&
+          steps.step2.outcome == 'success' &&
+          steps.step3.outcome != 'success' &&
+          steps.step4.outcome == 'success' 
+        shell: bash
+        run: |
+          expr 0+2 > conclusion.txt     
           
       - name: Upload conclusion
         uses: actions/upload-artifact@v2
