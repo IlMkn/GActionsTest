@@ -1,7 +1,7 @@
 name: 'Test Report'
 on:
   workflow_run:
-    workflows: ['main']                    
+    workflows: ['ActionsOnPR']                    
     types:
       - completed
 jobs:
