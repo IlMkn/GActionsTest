@@ -54,7 +54,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: my-artifact
+          name: test-results
           path: ./**/code_for_testing/
 
       - name: Display structure of downloaded files
