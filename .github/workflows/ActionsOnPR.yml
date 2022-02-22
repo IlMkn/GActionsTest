@@ -27,12 +27,6 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
         
-      - name: copy file
-        uses: canastro/copy-action@0.0.2
-        with:
-          source: "code_for_testing/Sum.cs"
-          target: "Sum.cs"  
-        
       - name: Create sln
         working-directory: ./myNewFolder
         run: dotnet new sln --name t
