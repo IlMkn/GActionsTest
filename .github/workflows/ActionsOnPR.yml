@@ -50,9 +50,13 @@ jobs:
           name: test-results  
           path: ./**/TestResults/*.trx
           
-      - name: GetArt
-        uses: actions/download-artifact@v2
+
+
+      - uses: actions/download-artifact@v2
         with:
-          name: test-results
-          path: ./
-        
+          name: my-artifact
+          path: ./**/code_for_testing/
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ./**/code_for_testing/
