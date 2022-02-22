@@ -43,10 +43,15 @@ jobs:
           dotnet build ./myNewFolder/t.sln
           dotnet test XUnitTestProject1.csproj --logger "trx;LogFileName=test-results.trx"   
           
-      - name: Unit Test Results
-        uses: dorny/test-reporter@v1.5.0
+      - name: Publish Unit Test Results
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: test-results  
           path: ./**/TestResults/*.trx
-          reporter: dotnet-trx   
+          
+      - name: Download art
+      - uses: actions/download-artifact@v2
+        with:
+          name: test-result
+        
